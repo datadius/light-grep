@@ -24,11 +24,27 @@ mod tests {
         let contents = "\
 Rust:
 safe, fast, productive.
-Pick three.";
+Pick three.
+Duct tape.";
 
         assert_eq!(
             vec!["safe, fast, productive."],
             lightgrep::search(query, contents)
+        );
+    }
+
+    #[test]
+    fn case_insensitive() {
+        let query = "rUsT";
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.
+Trust me.";
+
+        assert_eq!(
+            vec!["Rust:", "Trust me."],
+            lightgrep::search_case_insensitive(query, contents)
         );
     }
 }
